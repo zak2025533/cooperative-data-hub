@@ -51,7 +51,7 @@ export function CrudPage({
     if (!search) return data;
     const q = search.toLowerCase();
     return data.filter((r: any) =>
-      searchable.some((k) => String(r[k] ?? "").toLowerCase().includes(q))
+      searchable.some((k: string) => String(r[k] ?? "").toLowerCase().includes(q))
     );
   }, [data, search, searchable]);
 
@@ -98,8 +98,8 @@ export function CrudPage({
   function onNew() { setEditing({ ...defaults }); setOpen(true); }
   function onEdit(row: any) { setEditing({ ...row }); setOpen(true); }
 
-  const tableCols = columns.filter((c) => !c.hideInTable);
-  const formCols = columns.filter((c) => !c.hideInForm);
+  const tableCols = columns.filter((c: Column) => !c.hideInTable);
+  const formCols = columns.filter((c: Column) => !c.hideInForm);
 
   return (
     <div className="p-6 space-y-4">
@@ -125,7 +125,7 @@ export function CrudPage({
           <table className="w-full text-sm">
             <thead className="bg-muted/60">
               <tr>
-                {tableCols.map((c) => (
+                {tableCols.map((c: Column) => (
                   <th key={c.key} className="text-right p-3 font-semibold whitespace-nowrap">{c.label}</th>
                 ))}
                 <th className="p-3 w-32"></th>
@@ -140,7 +140,7 @@ export function CrudPage({
               )}
               {filtered.map((row: any) => (
                 <tr key={row.id} className="border-t hover:bg-muted/30">
-                  {tableCols.map((c) => (
+                  {tableCols.map((c: Column) => (
                     <td key={c.key} className="p-3 whitespace-nowrap">
                       {c.format ? c.format(row[c.key], row) : (row[c.key] ?? "—")}
                     </td>
@@ -169,7 +169,7 @@ export function CrudPage({
             onSubmit={(e) => { e.preventDefault(); save.mutate(editing); }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2"
           >
-            {formCols.map((c) => (
+            {formCols.map((c: Column) => (
               <div key={c.key} className={c.type === "textarea" ? "md:col-span-2" : ""}>
                 <label className="text-sm font-medium block mb-1">
                   {c.label}{c.required && <span className="text-destructive"> *</span>}
@@ -188,7 +188,7 @@ export function CrudPage({
                     onChange={(e) => setEditing({ ...editing, [c.key]: e.target.value })}
                   >
                     <option value="">— اختر —</option>
-                    {(c.options || []).map((o) => <option key={o} value={o}>{o}</option>)}
+                    {(c.options || []).map((o: string) => <option key={o} value={o}>{o}</option>)}
                   </select>
                 ) : (
                   <Input
