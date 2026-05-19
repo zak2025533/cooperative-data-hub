@@ -29,10 +29,10 @@ type Props = {
   onBeforeSave?: (row: any) => any;
 };
 
-export function CrudPage<T extends { id: string }>({
+export function CrudPage({
   title, table, columns, defaults = {}, orderBy = "created_at", searchable = [],
   onBeforeSave,
-}: Props<T>) {
+}: Props) {
   const qc = useQueryClient();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
