@@ -23,7 +23,7 @@ function InstallmentsPage() {
       columns={[
         { key: "loan_id", label: "القرض", type: "select", required: true,
           options: loans.map((l: any) => l.id),
-          format: (v) => loans.find((l: any) => l.id === v)?.loan_no || "—" },
+          format: (v: any) => loans.find((l: any) => l.id === v)?.loan_no || "—" },
         { key: "installment_no", label: "رقم القسط", type: "number", required: true },
         { key: "due_date", label: "تاريخ الاستحقاق", type: "date", required: true },
         { key: "amount", label: "قيمة القسط", type: "number", required: true, format: fmtMoney },
@@ -35,7 +35,7 @@ function InstallmentsPage() {
           options: ["غير مستحق","مسدد","جزئي","متأخر","متعثر"] },
         { key: "notes", label: "ملاحظات", type: "textarea", hideInTable: true },
       ]}
-      onBeforeSave={(row) => {
+      onBeforeSave={(row: any) => {
         const amt = Number(row.amount || 0);
         const paid = Number(row.paid || 0);
         return { ...row, remaining: amt - paid };

@@ -24,7 +24,7 @@ function LoansPage() {
         { key: "loan_no", label: "رقم القرض" },
         { key: "beneficiary_id", label: "المستفيد", type: "select",
           options: bens.map((b: any) => b.id),
-          format: (v) => bens.find((b: any) => b.id === v)?.name || "—" },
+          format: (v: any) => bens.find((b: any) => b.id === v)?.name || "—" },
         { key: "loan_type", label: "نوع القرض", type: "select",
           options: ["دعم","قرض أبيض","قرض مسترد","تمويل دوار","مساهمة مجتمعية"] },
         { key: "amount", label: "قيمة القرض", type: "number", required: true, format: fmtMoney },
@@ -37,7 +37,7 @@ function LoansPage() {
         { key: "status", label: "الحالة", type: "select", options: ["نشط","منتهي","متعثر","متأخر"] },
         { key: "notes", label: "ملاحظات", type: "textarea", hideInTable: true },
       ]}
-      onBeforeSave={(row) => {
+      onBeforeSave={(row: any) => {
         const amount = Number(row.amount || 0);
         const paid = Number(row.total_paid || 0);
         return { ...row, remaining: amount - paid };

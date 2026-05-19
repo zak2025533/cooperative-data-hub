@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/memberships")({
         { key: "status", label: "الحالة", type: "select", options: ["نشط","منسحب","موقوف"] },
         { key: "notes", label: "ملاحظات", type: "textarea", hideInTable: true },
       ]}
-      onBeforeSave={(row) => {
+      onBeforeSave={(row: any) => {
         const sc = Number(row.shares_count || 0);
         const sv = Number(row.share_value || 0);
         return { ...row, total_value: sc * sv };
