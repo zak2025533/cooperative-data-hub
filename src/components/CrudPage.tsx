@@ -8,24 +8,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import { toast } from "sonner";
 
-export type Column<T> = {
-  key: keyof T & string;
+export type Column = {
+  key: string;
   label: string;
   type?: "text" | "number" | "date" | "textarea" | "select";
   options?: string[];
-  format?: (v: any, row: T) => ReactNode;
+  format?: (v: any, row: any) => ReactNode;
   required?: boolean;
   hideInTable?: boolean;
   hideInForm?: boolean;
 };
 
-type Props<T extends { id: string }> = {
+type Props = {
   title: string;
   table: string;
-  columns: Column<T>[];
-  defaults?: Partial<T>;
+  columns: Column[];
+  defaults?: Record<string, any>;
   orderBy?: string;
-  searchable?: (keyof T & string)[];
+  searchable?: string[];
   onBeforeSave?: (row: any) => any;
 };
 
