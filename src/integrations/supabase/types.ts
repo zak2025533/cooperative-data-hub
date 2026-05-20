@@ -238,6 +238,66 @@ export type Database = {
           },
         ]
       }
+      contract_farming: {
+        Row: {
+          actual_qty: number | null
+          area: string | null
+          contract_date: string
+          contract_no: string | null
+          created_at: string
+          crop: string | null
+          expected_qty: number | null
+          farmer_name: string
+          farmer_phone: string | null
+          id: string
+          land_area: number | null
+          notes: string | null
+          season: string | null
+          status: string | null
+          total_value: number | null
+          unit_price: number | null
+          village: string | null
+        }
+        Insert: {
+          actual_qty?: number | null
+          area?: string | null
+          contract_date?: string
+          contract_no?: string | null
+          created_at?: string
+          crop?: string | null
+          expected_qty?: number | null
+          farmer_name: string
+          farmer_phone?: string | null
+          id?: string
+          land_area?: number | null
+          notes?: string | null
+          season?: string | null
+          status?: string | null
+          total_value?: number | null
+          unit_price?: number | null
+          village?: string | null
+        }
+        Update: {
+          actual_qty?: number | null
+          area?: string | null
+          contract_date?: string
+          contract_no?: string | null
+          created_at?: string
+          crop?: string | null
+          expected_qty?: number | null
+          farmer_name?: string
+          farmer_phone?: string | null
+          id?: string
+          land_area?: number | null
+          notes?: string | null
+          season?: string | null
+          status?: string | null
+          total_value?: number | null
+          unit_price?: number | null
+          village?: string | null
+        }
+        Relationships: []
+      }
       installments: {
         Row: {
           amount: number
@@ -290,6 +350,141 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      invoice_items: {
+        Row: {
+          created_at: string
+          id: string
+          invoice_id: string | null
+          item_id: string | null
+          item_name: string | null
+          notes: string | null
+          qty: number | null
+          total: number | null
+          unit_price: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          invoice_id?: string | null
+          item_id?: string | null
+          item_name?: string | null
+          notes?: string | null
+          qty?: number | null
+          total?: number | null
+          unit_price?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          invoice_id?: string | null
+          item_id?: string | null
+          item_name?: string | null
+          notes?: string | null
+          qty?: number | null
+          total?: number | null
+          unit_price?: number | null
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          created_at: string
+          discount: number | null
+          id: string
+          invoice_date: string
+          invoice_no: string | null
+          invoice_type: string
+          net_amount: number | null
+          notes: string | null
+          paid: number | null
+          party_name: string | null
+          party_phone: string | null
+          remaining: number | null
+          status: string | null
+          total_amount: number | null
+          unit_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          discount?: number | null
+          id?: string
+          invoice_date?: string
+          invoice_no?: string | null
+          invoice_type?: string
+          net_amount?: number | null
+          notes?: string | null
+          paid?: number | null
+          party_name?: string | null
+          party_phone?: string | null
+          remaining?: number | null
+          status?: string | null
+          total_amount?: number | null
+          unit_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          discount?: number | null
+          id?: string
+          invoice_date?: string
+          invoice_no?: string | null
+          invoice_type?: string
+          net_amount?: number | null
+          notes?: string | null
+          paid?: number | null
+          party_name?: string | null
+          party_phone?: string | null
+          remaining?: number | null
+          status?: string | null
+          total_amount?: number | null
+          unit_name?: string | null
+        }
+        Relationships: []
+      }
+      items: {
+        Row: {
+          category: string | null
+          code: string | null
+          cost_price: number | null
+          created_at: string
+          current_qty: number | null
+          id: string
+          name: string
+          notes: string | null
+          opening_qty: number | null
+          sale_price: number | null
+          unit_measure: string | null
+          unit_name: string | null
+        }
+        Insert: {
+          category?: string | null
+          code?: string | null
+          cost_price?: number | null
+          created_at?: string
+          current_qty?: number | null
+          id?: string
+          name: string
+          notes?: string | null
+          opening_qty?: number | null
+          sale_price?: number | null
+          unit_measure?: string | null
+          unit_name?: string | null
+        }
+        Update: {
+          category?: string | null
+          code?: string | null
+          cost_price?: number | null
+          created_at?: string
+          current_qty?: number | null
+          id?: string
+          name?: string
+          notes?: string | null
+          opening_qty?: number | null
+          sale_price?: number | null
+          unit_measure?: string | null
+          unit_name?: string | null
+        }
+        Relationships: []
       }
       journal_entries: {
         Row: {
@@ -503,6 +698,93 @@ export type Database = {
         }
         Relationships: []
       }
+      stock_movements: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          item_id: string | null
+          item_name: string | null
+          movement_date: string
+          movement_type: string | null
+          notes: string | null
+          qty_in: number | null
+          qty_out: number | null
+          ref_no: string | null
+          unit_name: string | null
+          unit_price: number | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_id?: string | null
+          item_name?: string | null
+          movement_date?: string
+          movement_type?: string | null
+          notes?: string | null
+          qty_in?: number | null
+          qty_out?: number | null
+          ref_no?: string | null
+          unit_name?: string | null
+          unit_price?: number | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_id?: string | null
+          item_name?: string | null
+          movement_date?: string
+          movement_type?: string | null
+          notes?: string | null
+          qty_in?: number | null
+          qty_out?: number | null
+          ref_no?: string | null
+          unit_name?: string | null
+          unit_price?: number | null
+        }
+        Relationships: []
+      }
+      stocktakes: {
+        Row: {
+          actual_qty: number | null
+          created_at: string
+          id: string
+          item_id: string | null
+          item_name: string | null
+          notes: string | null
+          stocktake_date: string
+          system_qty: number | null
+          unit_name: string | null
+          variance: number | null
+        }
+        Insert: {
+          actual_qty?: number | null
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          item_name?: string | null
+          notes?: string | null
+          stocktake_date?: string
+          system_qty?: number | null
+          unit_name?: string | null
+          variance?: number | null
+        }
+        Update: {
+          actual_qty?: number | null
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          item_name?: string | null
+          notes?: string | null
+          stocktake_date?: string
+          system_qty?: number | null
+          unit_name?: string | null
+          variance?: number | null
+        }
+        Relationships: []
+      }
       units: {
         Row: {
           created_at: string
@@ -524,6 +806,51 @@ export type Database = {
           id?: string
           manager_name?: string | null
           name?: string
+        }
+        Relationships: []
+      }
+      vouchers: {
+        Row: {
+          amount: number | null
+          area: string | null
+          counter_account: string | null
+          created_at: string
+          description: string | null
+          id: string
+          notes: string | null
+          party_name: string | null
+          payment_method: string | null
+          voucher_date: string
+          voucher_no: string | null
+          voucher_type: string
+        }
+        Insert: {
+          amount?: number | null
+          area?: string | null
+          counter_account?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          notes?: string | null
+          party_name?: string | null
+          payment_method?: string | null
+          voucher_date?: string
+          voucher_no?: string | null
+          voucher_type?: string
+        }
+        Update: {
+          amount?: number | null
+          area?: string | null
+          counter_account?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          notes?: string | null
+          party_name?: string | null
+          payment_method?: string | null
+          voucher_date?: string
+          voucher_no?: string | null
+          voucher_type?: string
         }
         Relationships: []
       }
