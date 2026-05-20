@@ -1,7 +1,8 @@
 import { Link, useLocation, useNavigate, Outlet } from "@tanstack/react-router";
 import {
   Home, LayoutDashboard, Users, Banknote, ListChecks, BookOpen, FolderKanban,
-  Wallet, Building2, ScrollText, LogOut, Sprout, ReceiptText, Warehouse,
+  Wallet, Building2, ScrollText, LogOut, Sprout, Boxes, ArrowLeftRight,
+  Receipt, FileText, ClipboardList, Handshake,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -19,6 +20,7 @@ const NAV_GROUPS: { title: string; items: { to: string; label: string; icon: any
     title: "العمليات المالية",
     items: [
       { to: "/cash", label: "الصندوق", icon: Wallet },
+      { to: "/vouchers", label: "سندات قبض/صرف", icon: Receipt },
       { to: "/journal", label: "القيود اليومية", icon: ScrollText },
     ],
   },
@@ -31,9 +33,19 @@ const NAV_GROUPS: { title: string; items: { to: string; label: string; icon: any
     ],
   },
   {
-    title: "المشاريع والعضوية",
+    title: "المخزون والمبيعات",
+    items: [
+      { to: "/items", label: "أصناف المخزون", icon: Boxes },
+      { to: "/stock", label: "حركات المخزون", icon: ArrowLeftRight },
+      { to: "/invoices", label: "الفواتير", icon: FileText },
+      { to: "/stocktake", label: "الجرد", icon: ClipboardList },
+    ],
+  },
+  {
+    title: "المشاريع والوحدات",
     items: [
       { to: "/projects", label: "المشاريع والتمويل", icon: FolderKanban },
+      { to: "/contract-farming", label: "الزراعة التعاقدية", icon: Handshake },
       { to: "/memberships", label: "العضوية والأسهم", icon: Building2 },
       { to: "/units", label: "الوحدات التشغيلية", icon: Sprout },
     ],
