@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
 import {
-  LayoutDashboard, BookOpen, ScrollText, Wallet, Building, Users, Banknote, ListChecks,
-  ClipboardList, FolderKanban, Boxes, ShoppingCart, ShoppingBag, BarChart3, Stethoscope,
-  Sprout, Receipt, FileText, FileMinus, FilePlus, FileX, Building2, Network, Settings,
+  LayoutDashboard, BookOpen, ScrollText, Wallet, Users, Banknote, ListChecks,
+  ClipboardList, FolderKanban, Boxes, ShoppingCart, Stethoscope,
+  Sprout, Receipt, FileText, FilePlus, FileMinus, Building2, Settings,
   Coffee, Wheat, TreePine, FlaskConical, Warehouse, Beef, Megaphone, Handshake,
-  HandCoins, Droplets, Bone, TrendingUp, Tractor,
+  HandCoins, Droplets, Bone, TrendingUp, Tractor, ArrowLeftRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/")({ component: MainHub });
@@ -16,8 +16,8 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
     items: [
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
       { to: "/accounts", label: "دليل الحسابات", icon: BookOpen },
-      { to: "/journal", label: "كشف حساب", icon: FileText, soon: true },
-      { to: "/journal", label: "قائمة الإجراءات", icon: ClipboardList, soon: true },
+      { to: "/journal", label: "كشف حساب", icon: FileText },
+      { to: "/journal", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
   {
@@ -25,9 +25,9 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
     items: [
       { to: "/journal", label: "القيود اليومية", icon: ScrollText },
       { to: "/cash", label: "الصندوق", icon: Wallet },
-      { to: "/cash", label: "البنك", icon: Building, soon: true },
+      { to: "/vouchers", label: "سند قبض", icon: FilePlus },
+      { to: "/vouchers", label: "سند صرف", icon: FileMinus },
       { to: "/cash", label: "العهد المالية", icon: HandCoins, soon: true },
-      { to: "/cash", label: "البنوك والصناديق", icon: Building, soon: true },
     ],
   },
   {
@@ -36,60 +36,46 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/beneficiaries", label: "المستفيدين", icon: Users },
       { to: "/loans", label: "القروض", icon: Banknote },
       { to: "/installments", label: "الأقساط", icon: ListChecks },
-      { to: "/loans", label: "المديونيات", icon: Receipt, soon: true },
-      { to: "/beneficiaries", label: "بيانات المزارقة", icon: Tractor, soon: true },
+      { to: "/loans", label: "المديونيات", icon: Receipt },
+      { to: "/beneficiaries", label: "بيانات المزارعين", icon: Tractor },
     ],
   },
   {
-    title: "المشاريع والأنشطة", color: "from-green-500/15 to-green-500/5",
+    title: "المخزون والمبيعات", color: "from-green-500/15 to-green-500/5",
+    items: [
+      { to: "/items", label: "أصناف المخزون", icon: Boxes },
+      { to: "/stock", label: "حركات المخزون", icon: ArrowLeftRight },
+      { to: "/invoices", label: "فواتير البيع/الشراء", icon: ShoppingCart },
+      { to: "/stocktake", label: "الجرد", icon: ClipboardList },
+      { to: "/contract-farming", label: "الزراعة التعاقدية", icon: Handshake },
+    ],
+  },
+  {
+    title: "المشاريع والإدارة", color: "from-orange-500/15 to-orange-500/5",
     items: [
       { to: "/projects", label: "المشاريع والتمويل", icon: FolderKanban },
-      { to: "/units", label: "المخزون", icon: Boxes, soon: true },
-      { to: "/units", label: "المبيعات", icon: ShoppingCart, soon: true },
-      { to: "/units", label: "المشتريات", icon: ShoppingBag, soon: true },
-      { to: "/units", label: "المجاميع الإنتاجية", icon: BarChart3, soon: true },
-      { to: "/units", label: "الصيدلية البيطرية", icon: Stethoscope, soon: true },
-      { to: "/units", label: "الزراعة التعاقدية", icon: Sprout, soon: true },
-      { to: "/units", label: "الجرد", icon: ClipboardList, soon: true },
-    ],
-  },
-  {
-    title: "السندات والفواتير", color: "from-orange-500/15 to-orange-500/5",
-    items: [
-      { to: "/cash", label: "سند قبض", icon: FilePlus, soon: true },
-      { to: "/cash", label: "سند صرف", icon: FileMinus, soon: true },
-      { to: "/cash", label: "فاتورة بيع", icon: Receipt, soon: true },
-      { to: "/cash", label: "فاتورة شراء", icon: Receipt, soon: true },
-      { to: "/cash", label: "أمر شراء", icon: FileText, soon: true },
-      { to: "/cash", label: "أمر صرف", icon: FileX, soon: true },
-      { to: "/cash", label: "الإقرارات والتعهدات", icon: ClipboardList, soon: true },
-    ],
-  },
-  {
-    title: "الإدارة والقطاعات", color: "from-purple-500/15 to-purple-500/5",
-    items: [
       { to: "/memberships", label: "العضوية والأسهم", icon: Building2 },
-      { to: "/units", label: "القطاعات", icon: Network, soon: true },
+      { to: "/units", label: "الوحدات", icon: Sprout },
       { to: "/units", label: "رموز الخدمات", icon: Settings, soon: true },
       { to: "/units", label: "الإدارة التنفيذية", icon: Building2, soon: true },
-      { to: "/units", label: "الوحدات", icon: Sprout },
     ],
   },
   {
     title: "الوحدات التشغيلية", color: "from-teal-500/15 to-teal-500/5",
     items: [
-      { to: "/units", label: "وحدة البن", icon: Coffee, soon: true },
-      { to: "/units", label: "وحدة البذور", icon: Wheat, soon: true },
-      { to: "/units", label: "وحدة المشاتل", icon: TreePine, soon: true },
-      { to: "/units", label: "وحدة العسل", icon: FlaskConical, soon: true },
-      { to: "/units", label: "الإنتاج والمباني", icon: Warehouse, soon: true },
-      { to: "/units", label: "الثروة الحيوانية", icon: Beef, soon: true },
-      { to: "/units", label: "وحدة التسويق", icon: Megaphone, soon: true },
-      { to: "/units", label: "الزراعة التعاقدية", icon: Handshake, soon: true },
-      { to: "/units", label: "وحدة الإقراض", icon: HandCoins, soon: true },
-      { to: "/units", label: "وحدة الري", icon: Droplets, soon: true },
-      { to: "/units", label: "وحدة الأعلاف", icon: Bone, soon: true },
-      { to: "/units", label: "التمكين الاقتصادي", icon: TrendingUp, soon: true },
+      { to: "/units", label: "وحدة البن", icon: Coffee },
+      { to: "/units", label: "وحدة البذور", icon: Wheat },
+      { to: "/units", label: "وحدة المشاتل", icon: TreePine },
+      { to: "/units", label: "وحدة العسل", icon: FlaskConical },
+      { to: "/units", label: "الإنتاج والمباني", icon: Warehouse },
+      { to: "/units", label: "الثروة الحيوانية", icon: Beef },
+      { to: "/units", label: "وحدة التسويق", icon: Megaphone },
+      { to: "/units", label: "الزراعة التعاقدية", icon: Handshake },
+      { to: "/units", label: "وحدة الإقراض", icon: HandCoins },
+      { to: "/units", label: "وحدة الري", icon: Droplets },
+      { to: "/units", label: "وحدة الأعلاف", icon: Bone },
+      { to: "/units", label: "التمكين الاقتصادي", icon: TrendingUp },
+      { to: "/units", label: "الصيدلية البيطرية", icon: Stethoscope },
     ],
   },
 ];
