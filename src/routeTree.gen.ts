@@ -12,13 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedVouchersRouteImport } from './routes/_authenticated/vouchers'
 import { Route as AuthenticatedUnitsRouteImport } from './routes/_authenticated/units'
+import { Route as AuthenticatedStocktakeRouteImport } from './routes/_authenticated/stocktake'
+import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedProjectsRouteImport } from './routes/_authenticated/projects'
 import { Route as AuthenticatedMembershipsRouteImport } from './routes/_authenticated/memberships'
 import { Route as AuthenticatedLoansRouteImport } from './routes/_authenticated/loans'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
+import { Route as AuthenticatedItemsRouteImport } from './routes/_authenticated/items'
+import { Route as AuthenticatedInvoicesRouteImport } from './routes/_authenticated/invoices'
 import { Route as AuthenticatedInstallmentsRouteImport } from './routes/_authenticated/installments'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedContractFarmingRouteImport } from './routes/_authenticated/contract-farming'
 import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/cash'
 import { Route as AuthenticatedBeneficiariesRouteImport } from './routes/_authenticated/beneficiaries'
 import { Route as AuthenticatedAccountsRouteImport } from './routes/_authenticated/accounts'
@@ -37,9 +43,24 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedVouchersRoute = AuthenticatedVouchersRouteImport.update({
+  id: '/vouchers',
+  path: '/vouchers',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedUnitsRoute = AuthenticatedUnitsRouteImport.update({
   id: '/units',
   path: '/units',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedStocktakeRoute = AuthenticatedStocktakeRouteImport.update({
+  id: '/stocktake',
+  path: '/stocktake',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedProjectsRoute = AuthenticatedProjectsRouteImport.update({
@@ -63,6 +84,16 @@ const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedItemsRoute = AuthenticatedItemsRouteImport.update({
+  id: '/items',
+  path: '/items',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedInvoicesRoute = AuthenticatedInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedInstallmentsRoute =
   AuthenticatedInstallmentsRouteImport.update({
     id: '/installments',
@@ -74,6 +105,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedContractFarmingRoute =
+  AuthenticatedContractFarmingRouteImport.update({
+    id: '/contract-farming',
+    path: '/contract-farming',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedCashRoute = AuthenticatedCashRouteImport.update({
   id: '/cash',
   path: '/cash',
@@ -97,26 +134,38 @@ export interface FileRoutesByFullPath {
   '/accounts': typeof AuthenticatedAccountsRoute
   '/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/cash': typeof AuthenticatedCashRoute
+  '/contract-farming': typeof AuthenticatedContractFarmingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/installments': typeof AuthenticatedInstallmentsRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/items': typeof AuthenticatedItemsRoute
   '/journal': typeof AuthenticatedJournalRoute
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
   '/projects': typeof AuthenticatedProjectsRoute
+  '/stock': typeof AuthenticatedStockRoute
+  '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
+  '/vouchers': typeof AuthenticatedVouchersRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/accounts': typeof AuthenticatedAccountsRoute
   '/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/cash': typeof AuthenticatedCashRoute
+  '/contract-farming': typeof AuthenticatedContractFarmingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/installments': typeof AuthenticatedInstallmentsRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/items': typeof AuthenticatedItemsRoute
   '/journal': typeof AuthenticatedJournalRoute
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
   '/projects': typeof AuthenticatedProjectsRoute
+  '/stock': typeof AuthenticatedStockRoute
+  '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
+  '/vouchers': typeof AuthenticatedVouchersRoute
   '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
@@ -126,13 +175,19 @@ export interface FileRoutesById {
   '/_authenticated/accounts': typeof AuthenticatedAccountsRoute
   '/_authenticated/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/_authenticated/cash': typeof AuthenticatedCashRoute
+  '/_authenticated/contract-farming': typeof AuthenticatedContractFarmingRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/installments': typeof AuthenticatedInstallmentsRoute
+  '/_authenticated/invoices': typeof AuthenticatedInvoicesRoute
+  '/_authenticated/items': typeof AuthenticatedItemsRoute
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
   '/_authenticated/loans': typeof AuthenticatedLoansRoute
   '/_authenticated/memberships': typeof AuthenticatedMembershipsRoute
   '/_authenticated/projects': typeof AuthenticatedProjectsRoute
+  '/_authenticated/stock': typeof AuthenticatedStockRoute
+  '/_authenticated/stocktake': typeof AuthenticatedStocktakeRoute
   '/_authenticated/units': typeof AuthenticatedUnitsRoute
+  '/_authenticated/vouchers': typeof AuthenticatedVouchersRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
@@ -143,26 +198,38 @@ export interface FileRouteTypes {
     | '/accounts'
     | '/beneficiaries'
     | '/cash'
+    | '/contract-farming'
     | '/dashboard'
     | '/installments'
+    | '/invoices'
+    | '/items'
     | '/journal'
     | '/loans'
     | '/memberships'
     | '/projects'
+    | '/stock'
+    | '/stocktake'
     | '/units'
+    | '/vouchers'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
     | '/accounts'
     | '/beneficiaries'
     | '/cash'
+    | '/contract-farming'
     | '/dashboard'
     | '/installments'
+    | '/invoices'
+    | '/items'
     | '/journal'
     | '/loans'
     | '/memberships'
     | '/projects'
+    | '/stock'
+    | '/stocktake'
     | '/units'
+    | '/vouchers'
     | '/'
   id:
     | '__root__'
@@ -171,13 +238,19 @@ export interface FileRouteTypes {
     | '/_authenticated/accounts'
     | '/_authenticated/beneficiaries'
     | '/_authenticated/cash'
+    | '/_authenticated/contract-farming'
     | '/_authenticated/dashboard'
     | '/_authenticated/installments'
+    | '/_authenticated/invoices'
+    | '/_authenticated/items'
     | '/_authenticated/journal'
     | '/_authenticated/loans'
     | '/_authenticated/memberships'
     | '/_authenticated/projects'
+    | '/_authenticated/stock'
+    | '/_authenticated/stocktake'
     | '/_authenticated/units'
+    | '/_authenticated/vouchers'
     | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
@@ -209,11 +282,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/vouchers': {
+      id: '/_authenticated/vouchers'
+      path: '/vouchers'
+      fullPath: '/vouchers'
+      preLoaderRoute: typeof AuthenticatedVouchersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/units': {
       id: '/_authenticated/units'
       path: '/units'
       fullPath: '/units'
       preLoaderRoute: typeof AuthenticatedUnitsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/stocktake': {
+      id: '/_authenticated/stocktake'
+      path: '/stocktake'
+      fullPath: '/stocktake'
+      preLoaderRoute: typeof AuthenticatedStocktakeRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/stock': {
+      id: '/_authenticated/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof AuthenticatedStockRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/projects': {
@@ -244,6 +338,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedJournalRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/items': {
+      id: '/_authenticated/items'
+      path: '/items'
+      fullPath: '/items'
+      preLoaderRoute: typeof AuthenticatedItemsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/invoices': {
+      id: '/_authenticated/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof AuthenticatedInvoicesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/installments': {
       id: '/_authenticated/installments'
       path: '/installments'
@@ -256,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/contract-farming': {
+      id: '/_authenticated/contract-farming'
+      path: '/contract-farming'
+      fullPath: '/contract-farming'
+      preLoaderRoute: typeof AuthenticatedContractFarmingRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/cash': {
@@ -286,13 +401,19 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAccountsRoute: typeof AuthenticatedAccountsRoute
   AuthenticatedBeneficiariesRoute: typeof AuthenticatedBeneficiariesRoute
   AuthenticatedCashRoute: typeof AuthenticatedCashRoute
+  AuthenticatedContractFarmingRoute: typeof AuthenticatedContractFarmingRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedInstallmentsRoute: typeof AuthenticatedInstallmentsRoute
+  AuthenticatedInvoicesRoute: typeof AuthenticatedInvoicesRoute
+  AuthenticatedItemsRoute: typeof AuthenticatedItemsRoute
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
   AuthenticatedLoansRoute: typeof AuthenticatedLoansRoute
   AuthenticatedMembershipsRoute: typeof AuthenticatedMembershipsRoute
   AuthenticatedProjectsRoute: typeof AuthenticatedProjectsRoute
+  AuthenticatedStockRoute: typeof AuthenticatedStockRoute
+  AuthenticatedStocktakeRoute: typeof AuthenticatedStocktakeRoute
   AuthenticatedUnitsRoute: typeof AuthenticatedUnitsRoute
+  AuthenticatedVouchersRoute: typeof AuthenticatedVouchersRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
@@ -300,13 +421,19 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAccountsRoute: AuthenticatedAccountsRoute,
   AuthenticatedBeneficiariesRoute: AuthenticatedBeneficiariesRoute,
   AuthenticatedCashRoute: AuthenticatedCashRoute,
+  AuthenticatedContractFarmingRoute: AuthenticatedContractFarmingRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedInstallmentsRoute: AuthenticatedInstallmentsRoute,
+  AuthenticatedInvoicesRoute: AuthenticatedInvoicesRoute,
+  AuthenticatedItemsRoute: AuthenticatedItemsRoute,
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
   AuthenticatedLoansRoute: AuthenticatedLoansRoute,
   AuthenticatedMembershipsRoute: AuthenticatedMembershipsRoute,
   AuthenticatedProjectsRoute: AuthenticatedProjectsRoute,
+  AuthenticatedStockRoute: AuthenticatedStockRoute,
+  AuthenticatedStocktakeRoute: AuthenticatedStocktakeRoute,
   AuthenticatedUnitsRoute: AuthenticatedUnitsRoute,
+  AuthenticatedVouchersRoute: AuthenticatedVouchersRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
@@ -321,13 +448,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
