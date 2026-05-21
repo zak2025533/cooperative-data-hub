@@ -17,6 +17,8 @@ export type Column = {
   required?: boolean;
   hideInTable?: boolean;
   hideInForm?: boolean;
+  readOnly?: boolean;
+  placeholder?: string;
 };
 
 type Props = {
@@ -26,12 +28,14 @@ type Props = {
   defaults?: Record<string, any>;
   orderBy?: string;
   searchable?: string[];
-  onBeforeSave?: (row: any) => any;
+  onBeforeSave?: (row: any) => any | Promise<any>;
+  customActions?: (row: any) => ReactNode;
+  filter?: { column: string; value: any };
 };
 
 export function CrudPage({
   title, table, columns, defaults = {}, orderBy = "created_at", searchable = [],
-  onBeforeSave,
+  onBeforeSave, customActions, filter,
 }: Props) {
   const qc = useQueryClient();
   const [search, setSearch] = useState("");
