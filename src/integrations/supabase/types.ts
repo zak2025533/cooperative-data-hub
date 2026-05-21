@@ -698,6 +698,42 @@ export type Database = {
         }
         Relationships: []
       }
+      service_codes: {
+        Row: {
+          category: string | null
+          code: string
+          created_at: string
+          default_price: number | null
+          id: string
+          is_active: boolean
+          name: string
+          notes: string | null
+          unit_measure: string | null
+        }
+        Insert: {
+          category?: string | null
+          code: string
+          created_at?: string
+          default_price?: number | null
+          id?: string
+          is_active?: boolean
+          name: string
+          notes?: string | null
+          unit_measure?: string | null
+        }
+        Update: {
+          category?: string | null
+          code?: string
+          created_at?: string
+          default_price?: number | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          notes?: string | null
+          unit_measure?: string | null
+        }
+        Relationships: []
+      }
       stock_movements: {
         Row: {
           created_at: string
