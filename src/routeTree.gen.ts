@@ -29,6 +29,7 @@ import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/c
 import { Route as AuthenticatedBeneficiariesRouteImport } from './routes/_authenticated/beneficiaries'
 import { Route as AuthenticatedAccountsRouteImport } from './routes/_authenticated/accounts'
 import { Route as AuthenticatedVouchersReceiptsRouteImport } from './routes/_authenticated/vouchers.receipts'
+import { Route as AuthenticatedVouchersPaymentsRouteImport } from './routes/_authenticated/vouchers.payments'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -134,6 +135,12 @@ const AuthenticatedVouchersReceiptsRoute =
     path: '/receipts',
     getParentRoute: () => AuthenticatedVouchersRoute,
   } as any)
+const AuthenticatedVouchersPaymentsRoute =
+  AuthenticatedVouchersPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedVouchersRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
   '/vouchers': typeof AuthenticatedVouchersRouteWithChildren
+  '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
 }
 export interface FileRoutesByTo {
@@ -175,6 +183,7 @@ export interface FileRoutesByTo {
   '/units': typeof AuthenticatedUnitsRoute
   '/vouchers': typeof AuthenticatedVouchersRouteWithChildren
   '/': typeof AuthenticatedIndexRoute
+  '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
 }
 export interface FileRoutesById {
@@ -198,6 +207,7 @@ export interface FileRoutesById {
   '/_authenticated/units': typeof AuthenticatedUnitsRoute
   '/_authenticated/vouchers': typeof AuthenticatedVouchersRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/_authenticated/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
 }
 export interface FileRouteTypes {
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/stocktake'
     | '/units'
     | '/vouchers'
+    | '/vouchers/payments'
     | '/vouchers/receipts'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/units'
     | '/vouchers'
     | '/'
+    | '/vouchers/payments'
     | '/vouchers/receipts'
   id:
     | '__root__'
@@ -264,6 +276,7 @@ export interface FileRouteTypes {
     | '/_authenticated/units'
     | '/_authenticated/vouchers'
     | '/_authenticated/'
+    | '/_authenticated/vouchers/payments'
     | '/_authenticated/vouchers/receipts'
   fileRoutesById: FileRoutesById
 }
@@ -414,14 +427,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVouchersReceiptsRouteImport
       parentRoute: typeof AuthenticatedVouchersRoute
     }
+    '/_authenticated/vouchers/payments': {
+      id: '/_authenticated/vouchers/payments'
+      path: '/payments'
+      fullPath: '/vouchers/payments'
+      preLoaderRoute: typeof AuthenticatedVouchersPaymentsRouteImport
+      parentRoute: typeof AuthenticatedVouchersRoute
+    }
   }
 }
 
 interface AuthenticatedVouchersRouteChildren {
+  AuthenticatedVouchersPaymentsRoute: typeof AuthenticatedVouchersPaymentsRoute
   AuthenticatedVouchersReceiptsRoute: typeof AuthenticatedVouchersReceiptsRoute
 }
 
 const AuthenticatedVouchersRouteChildren: AuthenticatedVouchersRouteChildren = {
+  AuthenticatedVouchersPaymentsRoute: AuthenticatedVouchersPaymentsRoute,
   AuthenticatedVouchersReceiptsRoute: AuthenticatedVouchersReceiptsRoute,
 }
 
