@@ -204,10 +204,13 @@ export function CrudPage({
                     type={c.type === "number" ? "number" : c.type === "date" ? "date" : "text"}
                     step={c.type === "number" ? "any" : undefined}
                     required={c.required}
+                    readOnly={c.readOnly}
+                    placeholder={c.placeholder}
                     value={editing?.[c.key] ?? ""}
                     onChange={(e) => setEditing({ ...editing, [c.key]: e.target.value })}
                   />
                 )}
+
               </div>
             ))}
             <DialogFooter className="md:col-span-2">
