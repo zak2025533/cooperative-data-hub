@@ -53,7 +53,6 @@ export function CrudPage({
     },
   });
 
-
   const filtered = useMemo(() => {
     if (!search) return data;
     const q = search.toLowerCase();
@@ -65,7 +64,6 @@ export function CrudPage({
   const save = useMutation({
     mutationFn: async (row: any) => {
       const payload = onBeforeSave ? await onBeforeSave(row) : row;
-      // strip empty strings on number/date fields
       const cleaned: any = {};
       for (const c of columns) {
         let v = payload[c.key];
@@ -109,33 +107,33 @@ export function CrudPage({
   const formCols = columns.filter((c: Column) => !c.hideInForm);
 
   return (
-    <div className="p-6 space-y-4">
-      <div className="flex items-center justify-between gap-4 flex-wrap">
+    <div className="p-4 sm:p-6 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="text-sm text-muted-foreground">إجمالي السجلات: {data.length}</p>
+          <h1 className="text-xl sm:text-2xl font-bold">{title}</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground">إجمالي السجلات: {data.length}</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           {searchable.length > 0 && (
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-none">
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
               <Input value={search} onChange={(e) => setSearch(e.target.value)}
-                     placeholder="بحث..." className="pr-9 w-64" />
+                     placeholder="بحث..." className="pr-9 w-full sm:w-64" />
             </div>
           )}
-          <Button onClick={onNew}><Plus className="size-4" /> إضافة جديد</Button>
+          <Button onClick={onNew} className="w-full sm:w-auto"><Plus className="size-4" /> إضافة جديد</Button>
         </div>
       </div>
 
       <Card className="overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto scrollbar-thin">
+          <table className="w-full text-xs sm:text-sm">
             <thead className="bg-muted/60">
               <tr>
                 {tableCols.map((c: Column) => (
                   <th key={c.key} className="text-right p-3 font-semibold whitespace-nowrap">{c.label}</th>
                 ))}
-                <th className="p-3 w-32"></th>
+                <th className="p-3 w-20 sm:w-32"></th>
               </tr>
             </thead>
             <tbody>
@@ -153,15 +151,14 @@ export function CrudPage({
                     </td>
                   ))}
                   <td className="p-3">
-                    <div className="flex items-center gap-1 justify-end flex-wrap">
+                    <div className="flex items-center gap-1 justify-end">
                       {customActions?.(row)}
-                      <Button variant="ghost" size="icon" onClick={() => onEdit(row)}><Pencil className="size-4" /></Button>
-                      <Button variant="ghost" size="icon" onClick={() => {
+                      <Button variant="ghost" size="icon" className="size-8" onClick={() => onEdit(row)}><Pencil className="size-4" /></Button>
+                      <Button variant="ghost" size="icon" className="size-8" onClick={() => {
                         if (confirm("تأكيد حذف هذا السجل؟")) remove.mutate(row.id);
                       }}><Trash2 className="size-4 text-destructive" /></Button>
                     </div>
                   </td>
-
                 </tr>
               ))}
             </tbody>
@@ -170,16 +167,16 @@ export function CrudPage({
       </Card>
 
       <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) setEditing(null); }}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" dir="rtl">
+        <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 sm:p-6" dir="rtl">
           <DialogHeader>
             <DialogTitle>{editing?.id ? "تعديل سجل" : "إضافة سجل جديد"}</DialogTitle>
           </DialogHeader>
           <form
             onSubmit={(e) => { e.preventDefault(); save.mutate(editing); }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2"
           >
             {formCols.map((c: Column) => (
-              <div key={c.key} className={c.type === "textarea" ? "md:col-span-2" : ""}>
+              <div key={c.key} className={c.type === "textarea" ? "sm:col-span-2" : ""}>
                 <label className="text-sm font-medium block mb-1">
                   {c.label}{c.required && <span className="text-destructive"> *</span>}
                 </label>
@@ -210,12 +207,11 @@ export function CrudPage({
                     onChange={(e) => setEditing({ ...editing, [c.key]: e.target.value })}
                   />
                 )}
-
               </div>
             ))}
-            <DialogFooter className="md:col-span-2">
-              <Button type="button" variant="outline" onClick={() => setOpen(false)}>إلغاء</Button>
-              <Button type="submit" disabled={save.isPending}>{save.isPending ? "..." : "حفظ"}</Button>
+            <DialogFooter className="sm:col-span-2 flex flex-col-reverse sm:flex-row gap-2 mt-4">
+              <Button type="button" variant="outline" onClick={() => setOpen(false)} className="w-full sm:w-auto">إلغاء</Button>
+              <Button type="submit" disabled={save.isPending} className="w-full sm:w-auto">{save.isPending ? "..." : "حفظ"}</Button>
             </DialogFooter>
           </form>
         </DialogContent>

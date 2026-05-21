@@ -27,7 +27,6 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/cash", label: "الصندوق", icon: Wallet },
       { to: "/vouchers/receipts", label: "سند قبض", icon: FilePlus },
       { to: "/vouchers/payments", label: "سند صرف", icon: FileMinus },
-
       { to: "/cash", label: "العهد المالية", icon: HandCoins, soon: true },
     ],
   },
@@ -83,29 +82,29 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
 
 function MainHub() {
   return (
-    <div className="p-6 space-y-6">
-      <header className="rounded-2xl bg-gradient-to-bl from-primary to-primary/70 text-primary-foreground p-8 shadow-lg">
-        <div className="flex items-start justify-between gap-6 flex-wrap">
-          <div>
-            <div className="text-sm opacity-80 mb-2">لوحة التحكم الرئيسية</div>
-            <h1 className="text-3xl font-bold leading-tight">
-              نظام إدارة جمعية حزم العدين<br />التعاونية الزراعية متعددة الأغراض
+    <div className="p-4 sm:p-6 space-y-6">
+      <header className="rounded-2xl bg-gradient-to-bl from-primary to-primary/70 text-primary-foreground p-5 sm:p-8 shadow-lg">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
+          <div className="space-y-2">
+            <div className="text-xs sm:text-sm opacity-80">لوحة التحكم الرئيسية</div>
+            <h1 className="text-xl sm:text-3xl font-bold leading-tight">
+              نظام إدارة جمعية حزم العدين<br className="hidden sm:block" /> التعاونية الزراعية
             </h1>
-            <p className="mt-3 opacity-90 max-w-xl text-sm">
+            <p className="opacity-90 max-w-xl text-xs sm:text-sm">
               نظام متكامل لإدارة العمليات المالية، المستفيدين، القروض، المشاريع والوحدات التشغيلية.
             </p>
           </div>
           <Link to="/dashboard"
-                className="rounded-xl bg-accent text-accent-foreground px-5 py-3 text-sm font-semibold hover:opacity-90 transition shadow">
+                className="w-full sm:w-auto text-center rounded-xl bg-accent text-accent-foreground px-5 py-3 text-sm font-semibold hover:opacity-90 transition shadow">
             عرض المؤشرات الحية ←
           </Link>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5">
         {GROUPS.map((g) => (
-          <Card key={g.title} className={`p-5 bg-gradient-to-br ${g.color} border-border`}>
-            <h2 className="font-bold text-base mb-4 pb-3 border-b border-border/50">{g.title}</h2>
+          <Card key={g.title} className={`p-4 sm:p-5 bg-gradient-to-br ${g.color} border-border`}>
+            <h2 className="font-bold text-sm sm:text-base mb-4 pb-3 border-b border-border/50">{g.title}</h2>
             <ul className="space-y-1">
               {g.items.map((it, i) => {
                 const Icon = it.icon;
@@ -113,12 +112,12 @@ function MainHub() {
                   <li key={i}>
                     <Link
                       to={it.to}
-                      className="group flex items-center gap-2 px-2 py-1.5 rounded-md text-sm hover:bg-background/70 transition"
+                      className="group flex items-center gap-2 px-2 py-1.5 rounded-md text-xs sm:text-sm hover:bg-background/70 transition"
                     >
-                      <Icon className="size-4 text-primary opacity-80 group-hover:opacity-100" />
+                      <Icon className="size-3.5 sm:size-4 text-primary opacity-80 group-hover:opacity-100" />
                       <span className="flex-1">{it.label}</span>
                       {it.soon && (
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">قريباً</span>
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">قريباً</span>
                       )}
                     </Link>
                   </li>
