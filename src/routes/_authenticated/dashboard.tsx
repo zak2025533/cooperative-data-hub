@@ -12,15 +12,15 @@ export const Route = createFileRoute("/_authenticated/dashboard")({ component: D
 
 function StatCard({ icon: Icon, label, value, accent }: any) {
   return (
-    <Card className="p-4 sm:p-5 relative overflow-hidden">
-      <div className={`absolute -left-4 -bottom-4 size-20 sm:size-24 rounded-full opacity-10 ${accent}`} />
-      <div className="flex items-start gap-3 sm:gap-4">
-        <div className={`size-9 sm:size-11 rounded-xl grid place-items-center text-primary-foreground shrink-0 ${accent}`}>
-          <Icon className="size-4 sm:size-5" />
+    <Card className="p-5 relative overflow-hidden">
+      <div className={`absolute -left-4 -bottom-4 size-24 rounded-full opacity-10 ${accent}`} />
+      <div className="flex items-start gap-4">
+        <div className={`size-11 rounded-xl grid place-items-center text-primary-foreground ${accent}`}>
+          <Icon className="size-5" />
         </div>
-        <div className="min-w-0">
-          <div className="text-[10px] sm:text-xs text-muted-foreground truncate">{label}</div>
-          <div className="text-base sm:text-xl font-bold mt-0.5 sm:mt-1 truncate">{value}</div>
+        <div>
+          <div className="text-xs text-muted-foreground">{label}</div>
+          <div className="text-xl font-bold mt-1">{value}</div>
         </div>
       </div>
     </Card>
@@ -62,13 +62,13 @@ function DashboardPage() {
   const s = stats;
 
   return (
-    <div className="p-4 sm:p-6 space-y-6">
+    <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold">لوحة المؤشرات</h1>
-        <p className="text-xs sm:text-sm text-muted-foreground">نظرة عامة حية على بيانات الجمعية</p>
+        <h1 className="text-2xl font-bold">لوحة المؤشرات</h1>
+        <p className="text-sm text-muted-foreground">نظرة عامة حية على بيانات الجمعية</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         <StatCard icon={TrendingUp} label="إجمالي المقبوضات" value={fmtMoney(s?.inflow)} accent="bg-success" />
         <StatCard icon={TrendingDown} label="إجمالي المصروفات" value={fmtMoney(s?.outflow)} accent="bg-destructive" />
         <StatCard icon={Wallet} label="رصيد الصندوق" value={fmtMoney(s?.cash_balance)} accent="bg-primary" />
