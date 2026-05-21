@@ -14,7 +14,9 @@ const NAV_GROUPS: { title: string; items: { to: string; label: string; icon: any
       { to: "/", label: "الرئيسية", icon: Home },
       { to: "/dashboard", label: "لوحة المؤشرات", icon: LayoutDashboard },
       { to: "/accounts", label: "دليل الحسابات", icon: BookOpen },
+      { to: "/service-codes", label: "رموز الخدمات", icon: ListChecks },
     ],
+
   },
   {
     title: "العمليات المالية",
