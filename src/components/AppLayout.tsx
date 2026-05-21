@@ -20,7 +20,9 @@ const NAV_GROUPS: { title: string; items: { to: string; label: string; icon: any
     title: "العمليات المالية",
     items: [
       { to: "/cash", label: "الصندوق", icon: Wallet },
-      { to: "/vouchers", label: "سندات قبض/صرف", icon: Receipt },
+      { to: "/vouchers/receipts", label: "سندات القبض", icon: Receipt },
+      { to: "/vouchers/payments", label: "سندات الصرف", icon: Receipt },
+
       { to: "/journal", label: "القيود اليومية", icon: ScrollText },
     ],
   },
