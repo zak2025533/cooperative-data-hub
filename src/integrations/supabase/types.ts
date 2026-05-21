@@ -820,6 +820,7 @@ export type Database = {
           notes: string | null
           party_name: string | null
           payment_method: string | null
+          status: string
           voucher_date: string
           voucher_no: string | null
           voucher_type: string
@@ -834,6 +835,7 @@ export type Database = {
           notes?: string | null
           party_name?: string | null
           payment_method?: string | null
+          status?: string
           voucher_date?: string
           voucher_no?: string | null
           voucher_type?: string
@@ -848,6 +850,7 @@ export type Database = {
           notes?: string | null
           party_name?: string | null
           payment_method?: string | null
+          status?: string
           voucher_date?: string
           voucher_no?: string | null
           voucher_type?: string
