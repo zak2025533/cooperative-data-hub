@@ -64,7 +64,7 @@ export function CrudPage({
 
   const save = useMutation({
     mutationFn: async (row: any) => {
-      const payload = onBeforeSave ? onBeforeSave(row) : row;
+      const payload = onBeforeSave ? await onBeforeSave(row) : row;
       // strip empty strings on number/date fields
       const cleaned: any = {};
       for (const c of columns) {
