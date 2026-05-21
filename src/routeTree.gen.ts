@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedVouchersRouteImport } from './routes/_authenticated/vouchers'
 import { Route as AuthenticatedUnitsRouteImport } from './routes/_authenticated/units'
 import { Route as AuthenticatedStocktakeRouteImport } from './routes/_authenticated/stocktake'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
@@ -28,6 +27,7 @@ import { Route as AuthenticatedContractFarmingRouteImport } from './routes/_auth
 import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/cash'
 import { Route as AuthenticatedBeneficiariesRouteImport } from './routes/_authenticated/beneficiaries'
 import { Route as AuthenticatedAccountsRouteImport } from './routes/_authenticated/accounts'
+import { Route as AuthenticatedVouchersIndexRouteImport } from './routes/_authenticated/vouchers.index'
 import { Route as AuthenticatedVouchersReceiptsRouteImport } from './routes/_authenticated/vouchers.receipts'
 import { Route as AuthenticatedVouchersPaymentsRouteImport } from './routes/_authenticated/vouchers.payments'
 
@@ -43,11 +43,6 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedVouchersRoute = AuthenticatedVouchersRouteImport.update({
-  id: '/vouchers',
-  path: '/vouchers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedUnitsRoute = AuthenticatedUnitsRouteImport.update({
@@ -129,17 +124,23 @@ const AuthenticatedAccountsRoute = AuthenticatedAccountsRouteImport.update({
   path: '/accounts',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedVouchersIndexRoute =
+  AuthenticatedVouchersIndexRouteImport.update({
+    id: '/vouchers/',
+    path: '/vouchers/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedVouchersReceiptsRoute =
   AuthenticatedVouchersReceiptsRouteImport.update({
-    id: '/receipts',
-    path: '/receipts',
-    getParentRoute: () => AuthenticatedVouchersRoute,
+    id: '/vouchers/receipts',
+    path: '/vouchers/receipts',
+    getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedVouchersPaymentsRoute =
   AuthenticatedVouchersPaymentsRouteImport.update({
-    id: '/payments',
-    path: '/payments',
-    getParentRoute: () => AuthenticatedVouchersRoute,
+    id: '/vouchers/payments',
+    path: '/vouchers/payments',
+    getParentRoute: () => AuthenticatedRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -160,9 +161,9 @@ export interface FileRoutesByFullPath {
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
-  '/vouchers': typeof AuthenticatedVouchersRouteWithChildren
   '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
+  '/vouchers/': typeof AuthenticatedVouchersIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -181,10 +182,10 @@ export interface FileRoutesByTo {
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
-  '/vouchers': typeof AuthenticatedVouchersRouteWithChildren
   '/': typeof AuthenticatedIndexRoute
   '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
+  '/vouchers': typeof AuthenticatedVouchersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,10 +206,10 @@ export interface FileRoutesById {
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/stocktake': typeof AuthenticatedStocktakeRoute
   '/_authenticated/units': typeof AuthenticatedUnitsRoute
-  '/_authenticated/vouchers': typeof AuthenticatedVouchersRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/_authenticated/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
+  '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -230,9 +231,9 @@ export interface FileRouteTypes {
     | '/stock'
     | '/stocktake'
     | '/units'
-    | '/vouchers'
     | '/vouchers/payments'
     | '/vouchers/receipts'
+    | '/vouchers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -251,10 +252,10 @@ export interface FileRouteTypes {
     | '/stock'
     | '/stocktake'
     | '/units'
-    | '/vouchers'
     | '/'
     | '/vouchers/payments'
     | '/vouchers/receipts'
+    | '/vouchers'
   id:
     | '__root__'
     | '/_authenticated'
@@ -274,10 +275,10 @@ export interface FileRouteTypes {
     | '/_authenticated/stock'
     | '/_authenticated/stocktake'
     | '/_authenticated/units'
-    | '/_authenticated/vouchers'
     | '/_authenticated/'
     | '/_authenticated/vouchers/payments'
     | '/_authenticated/vouchers/receipts'
+    | '/_authenticated/vouchers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -306,13 +307,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/vouchers': {
-      id: '/_authenticated/vouchers'
-      path: '/vouchers'
-      fullPath: '/vouchers'
-      preLoaderRoute: typeof AuthenticatedVouchersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/units': {
@@ -420,37 +414,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/vouchers/': {
+      id: '/_authenticated/vouchers/'
+      path: '/vouchers'
+      fullPath: '/vouchers/'
+      preLoaderRoute: typeof AuthenticatedVouchersIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/vouchers/receipts': {
       id: '/_authenticated/vouchers/receipts'
-      path: '/receipts'
+      path: '/vouchers/receipts'
       fullPath: '/vouchers/receipts'
       preLoaderRoute: typeof AuthenticatedVouchersReceiptsRouteImport
-      parentRoute: typeof AuthenticatedVouchersRoute
+      parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/vouchers/payments': {
       id: '/_authenticated/vouchers/payments'
-      path: '/payments'
+      path: '/vouchers/payments'
       fullPath: '/vouchers/payments'
       preLoaderRoute: typeof AuthenticatedVouchersPaymentsRouteImport
-      parentRoute: typeof AuthenticatedVouchersRoute
+      parentRoute: typeof AuthenticatedRoute
     }
   }
 }
-
-interface AuthenticatedVouchersRouteChildren {
-  AuthenticatedVouchersPaymentsRoute: typeof AuthenticatedVouchersPaymentsRoute
-  AuthenticatedVouchersReceiptsRoute: typeof AuthenticatedVouchersReceiptsRoute
-}
-
-const AuthenticatedVouchersRouteChildren: AuthenticatedVouchersRouteChildren = {
-  AuthenticatedVouchersPaymentsRoute: AuthenticatedVouchersPaymentsRoute,
-  AuthenticatedVouchersReceiptsRoute: AuthenticatedVouchersReceiptsRoute,
-}
-
-const AuthenticatedVouchersRouteWithChildren =
-  AuthenticatedVouchersRoute._addFileChildren(
-    AuthenticatedVouchersRouteChildren,
-  )
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAccountsRoute: typeof AuthenticatedAccountsRoute
@@ -468,8 +454,10 @@ interface AuthenticatedRouteChildren {
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedStocktakeRoute: typeof AuthenticatedStocktakeRoute
   AuthenticatedUnitsRoute: typeof AuthenticatedUnitsRoute
-  AuthenticatedVouchersRoute: typeof AuthenticatedVouchersRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedVouchersPaymentsRoute: typeof AuthenticatedVouchersPaymentsRoute
+  AuthenticatedVouchersReceiptsRoute: typeof AuthenticatedVouchersReceiptsRoute
+  AuthenticatedVouchersIndexRoute: typeof AuthenticatedVouchersIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -488,8 +476,10 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedStocktakeRoute: AuthenticatedStocktakeRoute,
   AuthenticatedUnitsRoute: AuthenticatedUnitsRoute,
-  AuthenticatedVouchersRoute: AuthenticatedVouchersRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedVouchersPaymentsRoute: AuthenticatedVouchersPaymentsRoute,
+  AuthenticatedVouchersReceiptsRoute: AuthenticatedVouchersReceiptsRoute,
+  AuthenticatedVouchersIndexRoute: AuthenticatedVouchersIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -503,3 +493,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
