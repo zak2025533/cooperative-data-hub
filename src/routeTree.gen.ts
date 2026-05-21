@@ -15,6 +15,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedUnitsRouteImport } from './routes/_authenticated/units'
 import { Route as AuthenticatedStocktakeRouteImport } from './routes/_authenticated/stocktake'
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
+import { Route as AuthenticatedServiceCodesRouteImport } from './routes/_authenticated/service-codes'
 import { Route as AuthenticatedProjectsRouteImport } from './routes/_authenticated/projects'
 import { Route as AuthenticatedMembershipsRouteImport } from './routes/_authenticated/memberships'
 import { Route as AuthenticatedLoansRouteImport } from './routes/_authenticated/loans'
@@ -60,6 +61,12 @@ const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
   path: '/stock',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedServiceCodesRoute =
+  AuthenticatedServiceCodesRouteImport.update({
+    id: '/service-codes',
+    path: '/service-codes',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedProjectsRoute = AuthenticatedProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
@@ -158,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
   '/projects': typeof AuthenticatedProjectsRoute
+  '/service-codes': typeof AuthenticatedServiceCodesRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
@@ -179,6 +187,7 @@ export interface FileRoutesByTo {
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
   '/projects': typeof AuthenticatedProjectsRoute
+  '/service-codes': typeof AuthenticatedServiceCodesRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
   '/units': typeof AuthenticatedUnitsRoute
@@ -203,6 +212,7 @@ export interface FileRoutesById {
   '/_authenticated/loans': typeof AuthenticatedLoansRoute
   '/_authenticated/memberships': typeof AuthenticatedMembershipsRoute
   '/_authenticated/projects': typeof AuthenticatedProjectsRoute
+  '/_authenticated/service-codes': typeof AuthenticatedServiceCodesRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/stocktake': typeof AuthenticatedStocktakeRoute
   '/_authenticated/units': typeof AuthenticatedUnitsRoute
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/loans'
     | '/memberships'
     | '/projects'
+    | '/service-codes'
     | '/stock'
     | '/stocktake'
     | '/units'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/loans'
     | '/memberships'
     | '/projects'
+    | '/service-codes'
     | '/stock'
     | '/stocktake'
     | '/units'
@@ -272,6 +284,7 @@ export interface FileRouteTypes {
     | '/_authenticated/loans'
     | '/_authenticated/memberships'
     | '/_authenticated/projects'
+    | '/_authenticated/service-codes'
     | '/_authenticated/stock'
     | '/_authenticated/stocktake'
     | '/_authenticated/units'
@@ -328,6 +341,13 @@ declare module '@tanstack/react-router' {
       path: '/stock'
       fullPath: '/stock'
       preLoaderRoute: typeof AuthenticatedStockRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/service-codes': {
+      id: '/_authenticated/service-codes'
+      path: '/service-codes'
+      fullPath: '/service-codes'
+      preLoaderRoute: typeof AuthenticatedServiceCodesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/projects': {
@@ -451,6 +471,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedLoansRoute: typeof AuthenticatedLoansRoute
   AuthenticatedMembershipsRoute: typeof AuthenticatedMembershipsRoute
   AuthenticatedProjectsRoute: typeof AuthenticatedProjectsRoute
+  AuthenticatedServiceCodesRoute: typeof AuthenticatedServiceCodesRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedStocktakeRoute: typeof AuthenticatedStocktakeRoute
   AuthenticatedUnitsRoute: typeof AuthenticatedUnitsRoute
@@ -473,6 +494,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedLoansRoute: AuthenticatedLoansRoute,
   AuthenticatedMembershipsRoute: AuthenticatedMembershipsRoute,
   AuthenticatedProjectsRoute: AuthenticatedProjectsRoute,
+  AuthenticatedServiceCodesRoute: AuthenticatedServiceCodesRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedStocktakeRoute: AuthenticatedStocktakeRoute,
   AuthenticatedUnitsRoute: AuthenticatedUnitsRoute,
@@ -493,3 +515,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
