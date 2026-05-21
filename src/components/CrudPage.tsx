@@ -17,6 +17,8 @@ export type Column = {
   required?: boolean;
   hideInTable?: boolean;
   hideInForm?: boolean;
+  readOnly?: boolean;
+  placeholder?: string;
 };
 
 type Props = {
@@ -26,12 +28,14 @@ type Props = {
   defaults?: Record<string, any>;
   orderBy?: string;
   searchable?: string[];
-  onBeforeSave?: (row: any) => any;
+  onBeforeSave?: (row: any) => any | Promise<any>;
+  customActions?: (row: any) => ReactNode;
+  filter?: { column: string; value: any };
 };
 
 export function CrudPage({
   title, table, columns, defaults = {}, orderBy = "created_at", searchable = [],
-  onBeforeSave,
+  onBeforeSave, customActions, filter,
 }: Props) {
   const qc = useQueryClient();
   const [search, setSearch] = useState("");
@@ -39,13 +43,16 @@ export function CrudPage({
   const [editing, setEditing] = useState<any | null>(null);
 
   const { data = [], isLoading } = useQuery({
-    queryKey: [table],
+    queryKey: [table, filter?.column, filter?.value],
     queryFn: async () => {
-      const { data, error } = await supabase.from(table as any).select("*").order(orderBy, { ascending: false }).limit(1000);
+      let q = supabase.from(table as any).select("*").order(orderBy, { ascending: false }).limit(1000);
+      if (filter) q = q.eq(filter.column, filter.value);
+      const { data, error } = await q;
       if (error) throw error;
       return data as any[];
     },
   });
+
 
   const filtered = useMemo(() => {
     if (!search) return data;
@@ -57,7 +64,7 @@ export function CrudPage({
 
   const save = useMutation({
     mutationFn: async (row: any) => {
-      const payload = onBeforeSave ? onBeforeSave(row) : row;
+      const payload = onBeforeSave ? await onBeforeSave(row) : row;
       // strip empty strings on number/date fields
       const cleaned: any = {};
       for (const c of columns) {
@@ -146,13 +153,15 @@ export function CrudPage({
                     </td>
                   ))}
                   <td className="p-3">
-                    <div className="flex items-center gap-1 justify-end">
+                    <div className="flex items-center gap-1 justify-end flex-wrap">
+                      {customActions?.(row)}
                       <Button variant="ghost" size="icon" onClick={() => onEdit(row)}><Pencil className="size-4" /></Button>
                       <Button variant="ghost" size="icon" onClick={() => {
                         if (confirm("تأكيد حذف هذا السجل؟")) remove.mutate(row.id);
                       }}><Trash2 className="size-4 text-destructive" /></Button>
                     </div>
                   </td>
+
                 </tr>
               ))}
             </tbody>
@@ -195,10 +204,13 @@ export function CrudPage({
                     type={c.type === "number" ? "number" : c.type === "date" ? "date" : "text"}
                     step={c.type === "number" ? "any" : undefined}
                     required={c.required}
+                    readOnly={c.readOnly}
+                    placeholder={c.placeholder}
                     value={editing?.[c.key] ?? ""}
                     onChange={(e) => setEditing({ ...editing, [c.key]: e.target.value })}
                   />
                 )}
+
               </div>
             ))}
             <DialogFooter className="md:col-span-2">

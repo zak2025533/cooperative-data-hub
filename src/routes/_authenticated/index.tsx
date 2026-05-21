@@ -25,8 +25,9 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
     items: [
       { to: "/journal", label: "القيود اليومية", icon: ScrollText },
       { to: "/cash", label: "الصندوق", icon: Wallet },
-      { to: "/vouchers", label: "سند قبض", icon: FilePlus },
-      { to: "/vouchers", label: "سند صرف", icon: FileMinus },
+      { to: "/vouchers/receipts", label: "سند قبض", icon: FilePlus },
+      { to: "/vouchers/payments", label: "سند صرف", icon: FileMinus },
+
       { to: "/cash", label: "العهد المالية", icon: HandCoins, soon: true },
     ],
   },
