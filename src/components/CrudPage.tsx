@@ -153,13 +153,15 @@ export function CrudPage({
                     </td>
                   ))}
                   <td className="p-3">
-                    <div className="flex items-center gap-1 justify-end">
+                    <div className="flex items-center gap-1 justify-end flex-wrap">
+                      {customActions?.(row)}
                       <Button variant="ghost" size="icon" onClick={() => onEdit(row)}><Pencil className="size-4" /></Button>
                       <Button variant="ghost" size="icon" onClick={() => {
                         if (confirm("تأكيد حذف هذا السجل؟")) remove.mutate(row.id);
                       }}><Trash2 className="size-4 text-destructive" /></Button>
                     </div>
                   </td>
+
                 </tr>
               ))}
             </tbody>
