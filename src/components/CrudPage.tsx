@@ -43,13 +43,16 @@ export function CrudPage({
   const [editing, setEditing] = useState<any | null>(null);
 
   const { data = [], isLoading } = useQuery({
-    queryKey: [table],
+    queryKey: [table, filter?.column, filter?.value],
     queryFn: async () => {
-      const { data, error } = await supabase.from(table as any).select("*").order(orderBy, { ascending: false }).limit(1000);
+      let q = supabase.from(table as any).select("*").order(orderBy, { ascending: false }).limit(1000);
+      if (filter) q = q.eq(filter.column, filter.value);
+      const { data, error } = await q;
       if (error) throw error;
       return data as any[];
     },
   });
+
 
   const filtered = useMemo(() => {
     if (!search) return data;
