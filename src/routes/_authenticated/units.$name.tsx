@@ -70,7 +70,7 @@ function UnitDashboard() {
 
 function StatCard({ icon: Icon, label, value, to }: any) {
   return (
-    <Link to={to}>
+    <Link to={to as any}>
       <Card className="p-4 hover:shadow-md transition">
         <Icon className="size-5 text-primary mb-2" />
         <div className="text-xs text-muted-foreground">{label}</div>
