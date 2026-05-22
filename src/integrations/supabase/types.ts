@@ -298,6 +298,51 @@ export type Database = {
         }
         Relationships: []
       }
+      custodies: {
+        Row: {
+          amount: number
+          created_at: string
+          custody_date: string
+          custody_no: string | null
+          holder_name: string
+          id: string
+          notes: string | null
+          purpose: string | null
+          remaining: number | null
+          settled_amount: number | null
+          status: string
+          unit_name: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          custody_date?: string
+          custody_no?: string | null
+          holder_name: string
+          id?: string
+          notes?: string | null
+          purpose?: string | null
+          remaining?: number | null
+          settled_amount?: number | null
+          status?: string
+          unit_name?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          custody_date?: string
+          custody_no?: string | null
+          holder_name?: string
+          id?: string
+          notes?: string | null
+          purpose?: string | null
+          remaining?: number | null
+          settled_amount?: number | null
+          status?: string
+          unit_name?: string | null
+        }
+        Relationships: []
+      }
       installments: {
         Row: {
           amount: number
@@ -653,6 +698,54 @@ export type Database = {
           shares_count?: number | null
           status?: string | null
           total_value?: number | null
+        }
+        Relationships: []
+      }
+      procedures: {
+        Row: {
+          assignee: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          notes: string | null
+          priority: string | null
+          procedure_date: string
+          procedure_no: string | null
+          procedure_type: string | null
+          requester: string | null
+          status: string
+          title: string
+        }
+        Insert: {
+          assignee?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: string | null
+          procedure_date?: string
+          procedure_no?: string | null
+          procedure_type?: string | null
+          requester?: string | null
+          status?: string
+          title: string
+        }
+        Update: {
+          assignee?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: string | null
+          procedure_date?: string
+          procedure_no?: string | null
+          procedure_type?: string | null
+          requester?: string | null
+          status?: string
+          title?: string
         }
         Relationships: []
       }
