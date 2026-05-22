@@ -109,7 +109,7 @@ function MainHub() {
                 return (
                   <li key={i}>
                     <Link
-                      to={it.to}
+                      to={it.to as any}
                       className="group flex items-center gap-2 px-2 py-1.5 rounded-md text-xs sm:text-sm hover:bg-background/70 transition"
                     >
                       <Icon className="size-3.5 sm:size-4 text-primary opacity-80 group-hover:opacity-100" />
@@ -125,6 +125,26 @@ function MainHub() {
           </Card>
         ))}
       </div>
+
+      <Card className="p-4 sm:p-5 bg-gradient-to-br from-teal-500/15 to-teal-500/5 border-border">
+        <h2 className="font-bold text-sm sm:text-base mb-4 pb-3 border-b border-border/50">الوحدات التشغيلية (13 وحدة)</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+          {UNITS.map((u) => {
+            const Icon = u.icon;
+            return (
+              <Link
+                key={u.label}
+                to="/units/$name"
+                params={{ name: u.label }}
+                className="group flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs sm:text-sm bg-background/60 hover:bg-background hover:shadow-md transition border border-border/50"
+              >
+                <Icon className="size-4 text-primary" />
+                <span className="flex-1 font-medium">{u.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </Card>
     </div>
   );
 }
