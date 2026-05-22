@@ -31,11 +31,12 @@ type Props = {
   onBeforeSave?: (row: any) => any | Promise<any>;
   customActions?: (row: any) => ReactNode;
   filter?: { column: string; value: any };
+  headerExtra?: ReactNode;
 };
 
 export function CrudPage({
   title, table, columns, defaults = {}, orderBy = "created_at", searchable = [],
-  onBeforeSave, customActions, filter,
+  onBeforeSave, customActions, filter, headerExtra,
 }: Props) {
   const qc = useQueryClient();
   const [search, setSearch] = useState("");
@@ -121,6 +122,7 @@ export function CrudPage({
                      placeholder="بحث..." className="pr-9 w-full sm:w-64" />
             </div>
           )}
+          {headerExtra}
           <Button onClick={onNew} className="w-full sm:w-auto"><Plus className="size-4" /> إضافة جديد</Button>
         </div>
       </div>

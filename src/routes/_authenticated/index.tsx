@@ -10,6 +10,22 @@ import {
 
 export const Route = createFileRoute("/_authenticated/")({ component: MainHub });
 
+const UNITS: { label: string; icon: any }[] = [
+  { label: "وحدة البن", icon: Coffee },
+  { label: "وحدة البذور", icon: Wheat },
+  { label: "وحدة المشاتل", icon: TreePine },
+  { label: "وحدة العسل", icon: FlaskConical },
+  { label: "الإنتاج والمباني", icon: Warehouse },
+  { label: "الثروة الحيوانية", icon: Beef },
+  { label: "وحدة التسويق", icon: Megaphone },
+  { label: "الزراعة التعاقدية", icon: Handshake },
+  { label: "وحدة الإقراض", icon: HandCoins },
+  { label: "وحدة الري", icon: Droplets },
+  { label: "وحدة الأعلاف", icon: Bone },
+  { label: "التمكين الاقتصادي", icon: TrendingUp },
+  { label: "الصيدلية البيطرية", icon: Stethoscope },
+];
+
 const GROUPS: { title: string; color: string; items: { to: string; label: string; icon: any; soon?: boolean }[] }[] = [
   {
     title: "النظام والتقارير", color: "from-emerald-500/15 to-emerald-500/5",
@@ -17,7 +33,7 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
       { to: "/accounts", label: "دليل الحسابات", icon: BookOpen },
       { to: "/journal", label: "كشف حساب", icon: FileText },
-      { to: "/journal", label: "قائمة الإجراءات", icon: ClipboardList },
+      { to: "/procedures", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
   {
@@ -27,7 +43,7 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/cash", label: "الصندوق", icon: Wallet },
       { to: "/vouchers/receipts", label: "سند قبض", icon: FilePlus },
       { to: "/vouchers/payments", label: "سند صرف", icon: FileMinus },
-      { to: "/cash", label: "العهد المالية", icon: HandCoins, soon: true },
+      { to: "/custodies", label: "العهد المالية", icon: HandCoins },
     ],
   },
   {
@@ -56,26 +72,8 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/projects", label: "المشاريع والتمويل", icon: FolderKanban },
       { to: "/memberships", label: "العضوية والأسهم", icon: Building2 },
       { to: "/units", label: "الوحدات", icon: Sprout },
-      { to: "/units", label: "رموز الخدمات", icon: Settings, soon: true },
-      { to: "/units", label: "الإدارة التنفيذية", icon: Building2, soon: true },
-    ],
-  },
-  {
-    title: "الوحدات التشغيلية", color: "from-teal-500/15 to-teal-500/5",
-    items: [
-      { to: "/units", label: "وحدة البن", icon: Coffee },
-      { to: "/units", label: "وحدة البذور", icon: Wheat },
-      { to: "/units", label: "وحدة المشاتل", icon: TreePine },
-      { to: "/units", label: "وحدة العسل", icon: FlaskConical },
-      { to: "/units", label: "الإنتاج والمباني", icon: Warehouse },
-      { to: "/units", label: "الثروة الحيوانية", icon: Beef },
-      { to: "/units", label: "وحدة التسويق", icon: Megaphone },
-      { to: "/units", label: "الزراعة التعاقدية", icon: Handshake },
-      { to: "/units", label: "وحدة الإقراض", icon: HandCoins },
-      { to: "/units", label: "وحدة الري", icon: Droplets },
-      { to: "/units", label: "وحدة الأعلاف", icon: Bone },
-      { to: "/units", label: "التمكين الاقتصادي", icon: TrendingUp },
-      { to: "/units", label: "الصيدلية البيطرية", icon: Stethoscope },
+      { to: "/service-codes", label: "رموز الخدمات", icon: Settings },
+      { to: "/procedures", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
 ];
@@ -111,7 +109,7 @@ function MainHub() {
                 return (
                   <li key={i}>
                     <Link
-                      to={it.to}
+                      to={it.to as any}
                       className="group flex items-center gap-2 px-2 py-1.5 rounded-md text-xs sm:text-sm hover:bg-background/70 transition"
                     >
                       <Icon className="size-3.5 sm:size-4 text-primary opacity-80 group-hover:opacity-100" />
@@ -127,6 +125,26 @@ function MainHub() {
           </Card>
         ))}
       </div>
+
+      <Card className="p-4 sm:p-5 bg-gradient-to-br from-teal-500/15 to-teal-500/5 border-border">
+        <h2 className="font-bold text-sm sm:text-base mb-4 pb-3 border-b border-border/50">الوحدات التشغيلية (13 وحدة)</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+          {UNITS.map((u) => {
+            const Icon = u.icon;
+            return (
+              <Link
+                key={u.label}
+                to="/units/$name"
+                params={{ name: u.label }}
+                className="group flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs sm:text-sm bg-background/60 hover:bg-background hover:shadow-md transition border border-border/50"
+              >
+                <Icon className="size-4 text-primary" />
+                <span className="flex-1 font-medium">{u.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </Card>
     </div>
   );
 }
