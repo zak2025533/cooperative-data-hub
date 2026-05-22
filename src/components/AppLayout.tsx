@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate, Outlet } from "@tanstack/react-router";
 import {
   Home, LayoutDashboard, Users, Banknote, ListChecks, BookOpen, FolderKanban,
   Wallet, Building2, ScrollText, LogOut, Sprout, Boxes, ArrowLeftRight,
-  Receipt, FileText, ClipboardList, Handshake, Menu,
+  Receipt, FileText, ClipboardList, Handshake, Menu, HandCoins,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -27,7 +27,9 @@ const NAV_GROUPS: { title: string; items: { to: string; label: string; icon: any
       { to: "/cash", label: "الصندوق", icon: Wallet },
       { to: "/vouchers/receipts", label: "سندات القبض", icon: Receipt },
       { to: "/vouchers/payments", label: "سندات الصرف", icon: Receipt },
+      { to: "/custodies", label: "العهد المالية", icon: HandCoins },
       { to: "/journal", label: "القيود اليومية", icon: ScrollText },
+      { to: "/procedures", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
   {
