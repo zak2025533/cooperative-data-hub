@@ -10,6 +10,22 @@ import {
 
 export const Route = createFileRoute("/_authenticated/")({ component: MainHub });
 
+const UNITS: { label: string; icon: any }[] = [
+  { label: "وحدة البن", icon: Coffee },
+  { label: "وحدة البذور", icon: Wheat },
+  { label: "وحدة المشاتل", icon: TreePine },
+  { label: "وحدة العسل", icon: FlaskConical },
+  { label: "الإنتاج والمباني", icon: Warehouse },
+  { label: "الثروة الحيوانية", icon: Beef },
+  { label: "وحدة التسويق", icon: Megaphone },
+  { label: "الزراعة التعاقدية", icon: Handshake },
+  { label: "وحدة الإقراض", icon: HandCoins },
+  { label: "وحدة الري", icon: Droplets },
+  { label: "وحدة الأعلاف", icon: Bone },
+  { label: "التمكين الاقتصادي", icon: TrendingUp },
+  { label: "الصيدلية البيطرية", icon: Stethoscope },
+];
+
 const GROUPS: { title: string; color: string; items: { to: string; label: string; icon: any; soon?: boolean }[] }[] = [
   {
     title: "النظام والتقارير", color: "from-emerald-500/15 to-emerald-500/5",
@@ -17,7 +33,7 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
       { to: "/accounts", label: "دليل الحسابات", icon: BookOpen },
       { to: "/journal", label: "كشف حساب", icon: FileText },
-      { to: "/journal", label: "قائمة الإجراءات", icon: ClipboardList },
+      { to: "/procedures", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
   {
@@ -27,7 +43,7 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/cash", label: "الصندوق", icon: Wallet },
       { to: "/vouchers/receipts", label: "سند قبض", icon: FilePlus },
       { to: "/vouchers/payments", label: "سند صرف", icon: FileMinus },
-      { to: "/cash", label: "العهد المالية", icon: HandCoins, soon: true },
+      { to: "/custodies", label: "العهد المالية", icon: HandCoins },
     ],
   },
   {
@@ -56,26 +72,8 @@ const GROUPS: { title: string; color: string; items: { to: string; label: string
       { to: "/projects", label: "المشاريع والتمويل", icon: FolderKanban },
       { to: "/memberships", label: "العضوية والأسهم", icon: Building2 },
       { to: "/units", label: "الوحدات", icon: Sprout },
-      { to: "/units", label: "رموز الخدمات", icon: Settings, soon: true },
-      { to: "/units", label: "الإدارة التنفيذية", icon: Building2, soon: true },
-    ],
-  },
-  {
-    title: "الوحدات التشغيلية", color: "from-teal-500/15 to-teal-500/5",
-    items: [
-      { to: "/units", label: "وحدة البن", icon: Coffee },
-      { to: "/units", label: "وحدة البذور", icon: Wheat },
-      { to: "/units", label: "وحدة المشاتل", icon: TreePine },
-      { to: "/units", label: "وحدة العسل", icon: FlaskConical },
-      { to: "/units", label: "الإنتاج والمباني", icon: Warehouse },
-      { to: "/units", label: "الثروة الحيوانية", icon: Beef },
-      { to: "/units", label: "وحدة التسويق", icon: Megaphone },
-      { to: "/units", label: "الزراعة التعاقدية", icon: Handshake },
-      { to: "/units", label: "وحدة الإقراض", icon: HandCoins },
-      { to: "/units", label: "وحدة الري", icon: Droplets },
-      { to: "/units", label: "وحدة الأعلاف", icon: Bone },
-      { to: "/units", label: "التمكين الاقتصادي", icon: TrendingUp },
-      { to: "/units", label: "الصيدلية البيطرية", icon: Stethoscope },
+      { to: "/service-codes", label: "رموز الخدمات", icon: Settings },
+      { to: "/procedures", label: "قائمة الإجراءات", icon: ClipboardList },
     ],
   },
 ];
