@@ -17,6 +17,7 @@ import { Route as AuthenticatedStocktakeRouteImport } from './routes/_authentica
 import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
 import { Route as AuthenticatedServiceCodesRouteImport } from './routes/_authenticated/service-codes'
 import { Route as AuthenticatedProjectsRouteImport } from './routes/_authenticated/projects'
+import { Route as AuthenticatedProceduresRouteImport } from './routes/_authenticated/procedures'
 import { Route as AuthenticatedMembershipsRouteImport } from './routes/_authenticated/memberships'
 import { Route as AuthenticatedLoansRouteImport } from './routes/_authenticated/loans'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
@@ -24,6 +25,7 @@ import { Route as AuthenticatedItemsRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedInvoicesRouteImport } from './routes/_authenticated/invoices'
 import { Route as AuthenticatedInstallmentsRouteImport } from './routes/_authenticated/installments'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCustodiesRouteImport } from './routes/_authenticated/custodies'
 import { Route as AuthenticatedContractFarmingRouteImport } from './routes/_authenticated/contract-farming'
 import { Route as AuthenticatedCashRouteImport } from './routes/_authenticated/cash'
 import { Route as AuthenticatedBeneficiariesRouteImport } from './routes/_authenticated/beneficiaries'
@@ -31,6 +33,7 @@ import { Route as AuthenticatedAccountsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedVouchersIndexRouteImport } from './routes/_authenticated/vouchers.index'
 import { Route as AuthenticatedVouchersReceiptsRouteImport } from './routes/_authenticated/vouchers.receipts'
 import { Route as AuthenticatedVouchersPaymentsRouteImport } from './routes/_authenticated/vouchers.payments'
+import { Route as AuthenticatedUnitsNameRouteImport } from './routes/_authenticated/units.$name'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -72,6 +75,11 @@ const AuthenticatedProjectsRoute = AuthenticatedProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProceduresRoute = AuthenticatedProceduresRouteImport.update({
+  id: '/procedures',
+  path: '/procedures',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedMembershipsRoute =
   AuthenticatedMembershipsRouteImport.update({
     id: '/memberships',
@@ -107,6 +115,11 @@ const AuthenticatedInstallmentsRoute =
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedCustodiesRoute = AuthenticatedCustodiesRouteImport.update({
+  id: '/custodies',
+  path: '/custodies',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedContractFarmingRoute =
@@ -149,6 +162,11 @@ const AuthenticatedVouchersPaymentsRoute =
     path: '/vouchers/payments',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedUnitsNameRoute = AuthenticatedUnitsNameRouteImport.update({
+  id: '/$name',
+  path: '/$name',
+  getParentRoute: () => AuthenticatedUnitsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -157,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/cash': typeof AuthenticatedCashRoute
   '/contract-farming': typeof AuthenticatedContractFarmingRoute
+  '/custodies': typeof AuthenticatedCustodiesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/installments': typeof AuthenticatedInstallmentsRoute
   '/invoices': typeof AuthenticatedInvoicesRoute
@@ -164,11 +183,13 @@ export interface FileRoutesByFullPath {
   '/journal': typeof AuthenticatedJournalRoute
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
+  '/procedures': typeof AuthenticatedProceduresRoute
   '/projects': typeof AuthenticatedProjectsRoute
   '/service-codes': typeof AuthenticatedServiceCodesRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
-  '/units': typeof AuthenticatedUnitsRoute
+  '/units': typeof AuthenticatedUnitsRouteWithChildren
+  '/units/$name': typeof AuthenticatedUnitsNameRoute
   '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
   '/vouchers/': typeof AuthenticatedVouchersIndexRoute
@@ -179,6 +200,7 @@ export interface FileRoutesByTo {
   '/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/cash': typeof AuthenticatedCashRoute
   '/contract-farming': typeof AuthenticatedContractFarmingRoute
+  '/custodies': typeof AuthenticatedCustodiesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/installments': typeof AuthenticatedInstallmentsRoute
   '/invoices': typeof AuthenticatedInvoicesRoute
@@ -186,12 +208,14 @@ export interface FileRoutesByTo {
   '/journal': typeof AuthenticatedJournalRoute
   '/loans': typeof AuthenticatedLoansRoute
   '/memberships': typeof AuthenticatedMembershipsRoute
+  '/procedures': typeof AuthenticatedProceduresRoute
   '/projects': typeof AuthenticatedProjectsRoute
   '/service-codes': typeof AuthenticatedServiceCodesRoute
   '/stock': typeof AuthenticatedStockRoute
   '/stocktake': typeof AuthenticatedStocktakeRoute
-  '/units': typeof AuthenticatedUnitsRoute
+  '/units': typeof AuthenticatedUnitsRouteWithChildren
   '/': typeof AuthenticatedIndexRoute
+  '/units/$name': typeof AuthenticatedUnitsNameRoute
   '/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
   '/vouchers': typeof AuthenticatedVouchersIndexRoute
@@ -204,6 +228,7 @@ export interface FileRoutesById {
   '/_authenticated/beneficiaries': typeof AuthenticatedBeneficiariesRoute
   '/_authenticated/cash': typeof AuthenticatedCashRoute
   '/_authenticated/contract-farming': typeof AuthenticatedContractFarmingRoute
+  '/_authenticated/custodies': typeof AuthenticatedCustodiesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/installments': typeof AuthenticatedInstallmentsRoute
   '/_authenticated/invoices': typeof AuthenticatedInvoicesRoute
@@ -211,12 +236,14 @@ export interface FileRoutesById {
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
   '/_authenticated/loans': typeof AuthenticatedLoansRoute
   '/_authenticated/memberships': typeof AuthenticatedMembershipsRoute
+  '/_authenticated/procedures': typeof AuthenticatedProceduresRoute
   '/_authenticated/projects': typeof AuthenticatedProjectsRoute
   '/_authenticated/service-codes': typeof AuthenticatedServiceCodesRoute
   '/_authenticated/stock': typeof AuthenticatedStockRoute
   '/_authenticated/stocktake': typeof AuthenticatedStocktakeRoute
-  '/_authenticated/units': typeof AuthenticatedUnitsRoute
+  '/_authenticated/units': typeof AuthenticatedUnitsRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/units/$name': typeof AuthenticatedUnitsNameRoute
   '/_authenticated/vouchers/payments': typeof AuthenticatedVouchersPaymentsRoute
   '/_authenticated/vouchers/receipts': typeof AuthenticatedVouchersReceiptsRoute
   '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
@@ -230,6 +257,7 @@ export interface FileRouteTypes {
     | '/beneficiaries'
     | '/cash'
     | '/contract-farming'
+    | '/custodies'
     | '/dashboard'
     | '/installments'
     | '/invoices'
@@ -237,11 +265,13 @@ export interface FileRouteTypes {
     | '/journal'
     | '/loans'
     | '/memberships'
+    | '/procedures'
     | '/projects'
     | '/service-codes'
     | '/stock'
     | '/stocktake'
     | '/units'
+    | '/units/$name'
     | '/vouchers/payments'
     | '/vouchers/receipts'
     | '/vouchers/'
@@ -252,6 +282,7 @@ export interface FileRouteTypes {
     | '/beneficiaries'
     | '/cash'
     | '/contract-farming'
+    | '/custodies'
     | '/dashboard'
     | '/installments'
     | '/invoices'
@@ -259,12 +290,14 @@ export interface FileRouteTypes {
     | '/journal'
     | '/loans'
     | '/memberships'
+    | '/procedures'
     | '/projects'
     | '/service-codes'
     | '/stock'
     | '/stocktake'
     | '/units'
     | '/'
+    | '/units/$name'
     | '/vouchers/payments'
     | '/vouchers/receipts'
     | '/vouchers'
@@ -276,6 +309,7 @@ export interface FileRouteTypes {
     | '/_authenticated/beneficiaries'
     | '/_authenticated/cash'
     | '/_authenticated/contract-farming'
+    | '/_authenticated/custodies'
     | '/_authenticated/dashboard'
     | '/_authenticated/installments'
     | '/_authenticated/invoices'
@@ -283,12 +317,14 @@ export interface FileRouteTypes {
     | '/_authenticated/journal'
     | '/_authenticated/loans'
     | '/_authenticated/memberships'
+    | '/_authenticated/procedures'
     | '/_authenticated/projects'
     | '/_authenticated/service-codes'
     | '/_authenticated/stock'
     | '/_authenticated/stocktake'
     | '/_authenticated/units'
     | '/_authenticated/'
+    | '/_authenticated/units/$name'
     | '/_authenticated/vouchers/payments'
     | '/_authenticated/vouchers/receipts'
     | '/_authenticated/vouchers/'
@@ -357,6 +393,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProjectsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/procedures': {
+      id: '/_authenticated/procedures'
+      path: '/procedures'
+      fullPath: '/procedures'
+      preLoaderRoute: typeof AuthenticatedProceduresRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/memberships': {
       id: '/_authenticated/memberships'
       path: '/memberships'
@@ -404,6 +447,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/custodies': {
+      id: '/_authenticated/custodies'
+      path: '/custodies'
+      fullPath: '/custodies'
+      preLoaderRoute: typeof AuthenticatedCustodiesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/contract-farming': {
@@ -455,14 +505,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVouchersPaymentsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/units/$name': {
+      id: '/_authenticated/units/$name'
+      path: '/$name'
+      fullPath: '/units/$name'
+      preLoaderRoute: typeof AuthenticatedUnitsNameRouteImport
+      parentRoute: typeof AuthenticatedUnitsRoute
+    }
   }
 }
+
+interface AuthenticatedUnitsRouteChildren {
+  AuthenticatedUnitsNameRoute: typeof AuthenticatedUnitsNameRoute
+}
+
+const AuthenticatedUnitsRouteChildren: AuthenticatedUnitsRouteChildren = {
+  AuthenticatedUnitsNameRoute: AuthenticatedUnitsNameRoute,
+}
+
+const AuthenticatedUnitsRouteWithChildren =
+  AuthenticatedUnitsRoute._addFileChildren(AuthenticatedUnitsRouteChildren)
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAccountsRoute: typeof AuthenticatedAccountsRoute
   AuthenticatedBeneficiariesRoute: typeof AuthenticatedBeneficiariesRoute
   AuthenticatedCashRoute: typeof AuthenticatedCashRoute
   AuthenticatedContractFarmingRoute: typeof AuthenticatedContractFarmingRoute
+  AuthenticatedCustodiesRoute: typeof AuthenticatedCustodiesRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedInstallmentsRoute: typeof AuthenticatedInstallmentsRoute
   AuthenticatedInvoicesRoute: typeof AuthenticatedInvoicesRoute
@@ -470,11 +539,12 @@ interface AuthenticatedRouteChildren {
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
   AuthenticatedLoansRoute: typeof AuthenticatedLoansRoute
   AuthenticatedMembershipsRoute: typeof AuthenticatedMembershipsRoute
+  AuthenticatedProceduresRoute: typeof AuthenticatedProceduresRoute
   AuthenticatedProjectsRoute: typeof AuthenticatedProjectsRoute
   AuthenticatedServiceCodesRoute: typeof AuthenticatedServiceCodesRoute
   AuthenticatedStockRoute: typeof AuthenticatedStockRoute
   AuthenticatedStocktakeRoute: typeof AuthenticatedStocktakeRoute
-  AuthenticatedUnitsRoute: typeof AuthenticatedUnitsRoute
+  AuthenticatedUnitsRoute: typeof AuthenticatedUnitsRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedVouchersPaymentsRoute: typeof AuthenticatedVouchersPaymentsRoute
   AuthenticatedVouchersReceiptsRoute: typeof AuthenticatedVouchersReceiptsRoute
@@ -486,6 +556,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedBeneficiariesRoute: AuthenticatedBeneficiariesRoute,
   AuthenticatedCashRoute: AuthenticatedCashRoute,
   AuthenticatedContractFarmingRoute: AuthenticatedContractFarmingRoute,
+  AuthenticatedCustodiesRoute: AuthenticatedCustodiesRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedInstallmentsRoute: AuthenticatedInstallmentsRoute,
   AuthenticatedInvoicesRoute: AuthenticatedInvoicesRoute,
@@ -493,11 +564,12 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
   AuthenticatedLoansRoute: AuthenticatedLoansRoute,
   AuthenticatedMembershipsRoute: AuthenticatedMembershipsRoute,
+  AuthenticatedProceduresRoute: AuthenticatedProceduresRoute,
   AuthenticatedProjectsRoute: AuthenticatedProjectsRoute,
   AuthenticatedServiceCodesRoute: AuthenticatedServiceCodesRoute,
   AuthenticatedStockRoute: AuthenticatedStockRoute,
   AuthenticatedStocktakeRoute: AuthenticatedStocktakeRoute,
-  AuthenticatedUnitsRoute: AuthenticatedUnitsRoute,
+  AuthenticatedUnitsRoute: AuthenticatedUnitsRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedVouchersPaymentsRoute: AuthenticatedVouchersPaymentsRoute,
   AuthenticatedVouchersReceiptsRoute: AuthenticatedVouchersReceiptsRoute,

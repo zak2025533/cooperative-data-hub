@@ -51,13 +51,13 @@ function UnitDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ListCard title="آخر حركات المخزون" icon={ArrowLeftRight} rows={data?.stock || []} render={(r) => (
+        <ListCard title="آخر حركات المخزون" icon={ArrowLeftRight} rows={data?.stock || []} render={(r: any) => (
           <div className="flex justify-between text-xs sm:text-sm py-1 border-b last:border-0">
             <span>{r.item_name} — <span className="text-muted-foreground">{r.movement_type}</span></span>
             <span className="text-muted-foreground">{r.movement_date}</span>
           </div>
         )} />
-        <ListCard title="آخر الفواتير" icon={Receipt} rows={data?.invoices || []} render={(r) => (
+        <ListCard title="آخر الفواتير" icon={Receipt} rows={data?.invoices || []} render={(r: any) => (
           <div className="flex justify-between text-xs sm:text-sm py-1 border-b last:border-0">
             <span>{r.invoice_no || "—"} — {r.party_name || "—"}</span>
             <span>{fmtMoney(r.net_amount)}</span>
